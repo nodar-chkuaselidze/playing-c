@@ -1,0 +1,3 @@
+[submodule "sources_to_explore/netsukuku"]
+	path = sources_to_explore/netsukuku
+	url = https://github.com/Netsukuku/netsukuku.git
