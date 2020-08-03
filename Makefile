@@ -1,7 +1,5 @@
 ##
 # Nod is kinda learning C..
-# -- beh
-
 
 DIRECTORIES=$(wildcard */)
 FILES=$(wildcard */*.c)
