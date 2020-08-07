@@ -44,3 +44,9 @@ Files:
     ptr-v-arr.
       - PTR -> PTR -> data
       - p.s. We can copy arrays on stack using structs.
+
+#### Array inside a struct
+  - Arrays (Not PTR to ARR) inside struct will get copied like structs
+  whenever struct will get copied.
+  - We can use this to make arrays stack/copyable.
+  - If we access array directly, we still get above behaviour. (PTR decay)
