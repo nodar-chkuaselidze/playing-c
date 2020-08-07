@@ -10,29 +10,11 @@
 // We can do sizeof this way.
 typedef int arr10[10];
 
-// Check struct-array wrapper as well.
-struct arr10_s {
-  int a[10];
-};
-
-/**
- * Because structs are copied on stack,
- * arr will be coppied as well with it.
- * NOTE: we are returning stack address, meaning
- * it will not be usable outside (We just want to compare).
- */
-struct arr10_s stack_copy(struct arr10_s arr) {
-  printf("Ptr from stack_copy: %p\n", &arr);
-  // Here this is local copy that wont exist after this function.
-  return arr;
-}
-
 int
 main() {
   {
     START_BLOCK("Some sizeofs.");
     printf("sizeof(arr10): %lu\n", sizeof(arr10));
-    printf("sizeof(struct arr10_s): %lu\n", sizeof(struct arr10_s));
     printf("sizeof(sizeof(int[10])): %lu\n", sizeof(int[10]));
     END_BLOCK;
   }
@@ -187,22 +169,6 @@ main() {
     printf("Sizeof: %lu, Size: %lu \n", sizeof(ints3), ARRAY_SIZE(ints3));
     printf("Sizeof: %lu, Size: %lu \n", sizeof(ints4), ARRAY_SIZE(ints4));
 
-    END_BLOCK;
-  }
-
-  // NOTE: More tests in struct.c probably.
-  {
-    START_BLOCK("Stack copy and stack/arr equality in memory size.");
-    // Beginning of the struct is
-    // the beginning of the array !
-    struct arr10_s arr_s = { .a = {} };
-    printf("%p, %p\n", &arr_s, &arr_s);
-
-    // NOTE: Pointer to returned
-    // is again different.
-    // SO: This WILL copy arr_s 3 times.
-    struct arr10_s arr2_s = stack_copy(arr_s);
-    printf("Returned ptr: %p\n", &arr2_s);
     END_BLOCK;
   }
 
