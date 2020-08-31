@@ -50,3 +50,9 @@ Files:
   whenever struct will get copied.
   - We can use this to make arrays stack/copyable.
   - If we access array directly, we still get above behaviour. (PTR decay)
+
+#### Variable Length Arrays (VLAs)
+  - You can do this (BUT not advised): `int sum(int len, int arr[len]);`
+    - This will use `len` argument in `arr[len]`.
+    - GCC Has extention for this: `int sum(int len; int numbers[len], int len)`
+    BUT please dont use it.
