@@ -3,6 +3,9 @@
 // This is simple experiment with array and array of arrays.
 // Testing if we can have two interfaces to the same data.
 
+// Because both are allocated the exact same way in the memory
+// these two can be used interchangably.
+// Also see: test4-array-or-pointer/arr-of-arr.c
 union arr2d {
   int arr1d[6];
   int arr2d[2][3];
