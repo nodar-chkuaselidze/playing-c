@@ -8,12 +8,20 @@
 // NOTE: Even though arrays decay to pointers, arrays of arrays do not
 // decay to pointer to pointer, but instead they decay to pointer to array.
 
-// This will decay to int *x[2]
+// This will decay to int (*x)[2], e.g. bellow
 void acceptPointerToArray(int x[2][2]) {
 }
 
-// this will decay to int **x
+// this will be the same *x[2]
+void acceptPointerToArrayDecayed(int (*x)[2]) {
+}
+
+// this will decay to **int
 void acceptPointerToPointer(int *x[2]) {
+}
+
+// decayed version of above declaration.
+void acceptPointerToPointerDecayed(int **x) {
 }
 
 int main() {
@@ -35,10 +43,19 @@ int main() {
     }
   };
 
+  int (*xtmp)[2] = x1;
+
   // Does x1/x2 decay into pointers to pointers?
   acceptPointerToArray(x1);
-  // int[2][2] != **int warning.
+  acceptPointerToArrayDecayed(x1);
+  acceptPointerToArray(xtmp);
+  acceptPointerToArrayDecayed(xtmp);
+
+  // int[2][2] != **int / warning.
   acceptPointerToPointer(x1);
+  acceptPointerToPointerDecayed(x1);
+  acceptPointerToPointer(xtmp);
+  acceptPointerToPointerDecayed(xtmp);
 
   // this is confusing but thats what it is.
   // Because array can be viewed as pointer to the first
