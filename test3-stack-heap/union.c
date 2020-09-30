@@ -11,16 +11,16 @@ union arr2d {
   int arr2d[2][3];
 };
 
-void printAddr(union arr2d x) {
-  printf("printAddr: %p\n", &x);
+static void printAddr(union arr2d x) {
+  printf("printAddr: %p\n", (void *)&x);
 }
 
 int main() {
-  union arr2d x1 = {1, 2, 3, 4, 5, 6 };
+  union arr2d x1 = {{1, 2, 3, 4, 5, 6}};
 
   // We can see that union also copies array on the stack.
   printf("Size of the union: %lu\n", sizeof(union arr2d));
-  printf("at stack: %p\n", &x1);
+  printf("at stack: %p\n", (void *)&x1);
   printAddr(x1);
 
   printf("2d element: %d, 4th element: %d, 6th element: %d\n",

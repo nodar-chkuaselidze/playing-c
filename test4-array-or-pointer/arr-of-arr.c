@@ -5,6 +5,17 @@
 // But the way it is allocated is exact same, but they can be troublesome
 // to work with??
 
+// NOTE: Even though arrays decay to pointers, arrays of arrays do not
+// decay to pointer to pointer, but instead they decay to pointer to array.
+
+// This will decay to int *x[2]
+void acceptPointerToArray(int x[2][2]) {
+}
+
+// this will decay to int **x
+void acceptPointerToPointer(int *x[2]) {
+}
+
 int main() {
   int x1[2][2] = {
     {1, 2},
@@ -23,6 +34,11 @@ int main() {
       {21, 22, 23, 24}
     }
   };
+
+  // Does x1/x2 decay into pointers to pointers?
+  acceptPointerToArray(x1);
+  // int[2][2] != **int warning.
+  acceptPointerToPointer(x1);
 
   // this is confusing but thats what it is.
   // Because array can be viewed as pointer to the first
