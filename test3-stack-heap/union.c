@@ -16,6 +16,7 @@ int main() {
   union arr2d x1 = {1, 2, 3, 4, 5, 6 };
 
   // We can see that union also copies array on the stack.
+  printf("Size of the union: %lu\n", sizeof(union arr2d));
   printf("at stack: %p\n", &x1);
   printAddr(x1);
 
