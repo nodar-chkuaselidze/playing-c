@@ -5,8 +5,7 @@
 
 #define N 10000000
 
-int main() {
-
+int main(void) {
   uint64_t start = hrtime();
 
   stack_llint_t *stack = cii_stack_llint_new();

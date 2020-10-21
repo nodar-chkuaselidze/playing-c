@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "stack_arrint.h"
 
-int main() {
+int main(void) {
   stack_arrint_t *stack = cii_stack_arrint_new();
 
   for (int i = 0; i < 10; i++)

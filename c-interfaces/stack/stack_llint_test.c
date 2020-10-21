@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "stack_llint.h"
 
-int main() {
+int main(void) {
   stack_llint_t *stack = cii_stack_llint_new();
 
   for (int i = 0; i < 10; i++)

@@ -30,7 +30,7 @@ void cii_stack_arrint_push(stack_arrint_t *stack, int x) {
 int cii_stack_arrint_empty(stack_arrint_t *stack) {
   assert(stack != NULL);
 
-  return stack->count = 0;
+  return stack->count == 0;
 }
 
 int cii_stack_arrint_pop(stack_arrint_t *stack) {
@@ -52,7 +52,7 @@ void cii_stack_arrint_print(FILE *out, stack_arrint_t *stack) {
 
   fprintf(out, "Stack count: %d.\n", stack->count);
 
-  for (int i = stack->count - 1; i >= 0; i--) {
+  for (uint32_t i = stack->count - 1; i >= 0; i--) {
     fprintf(out, "%d->", stack->arr[i]);
   }
 

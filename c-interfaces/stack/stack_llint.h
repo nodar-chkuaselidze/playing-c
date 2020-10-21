@@ -21,7 +21,7 @@ struct stack_llint {
 
 typedef struct stack_llint stack_llint_t;
 
-extern stack_llint_t *cii_stack_llint_new();
+extern stack_llint_t *cii_stack_llint_new(void);
 extern int cii_stack_llint_empty(stack_llint_t *stack);
 extern void cii_stack_llint_push(stack_llint_t *stack, int x);
 extern int cii_stack_llint_pop(stack_llint_t *stack);

@@ -1,34 +1,39 @@
+# Compiler and linker configs.
+WARNINGS := -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align \
+			-Wwrite-strings -Wmissing-prototypes -Wmissing-declarations \
+			-Wredundant-decls -Wnested-externs -Winline \
+			-Wuninitialized -Wconversion -Wstrict-prototypes
+CFLAGS := -O3 -std=c99 -D_GNU_SOURCE $(WARNINGS) $(CFLAGS)
+LDFLAGS := $(LDFLAGS)
 
-AINT_FILES=stack_aint.h stack_aint.c
-ARRINT_FILES=stack_arrint.h stack_arrint.c
-HRTIME=hrtime.h hrtime.c
-CFLAGS:=$(CFLAGS)
+SRC_DIR = .
+BUILD_DIR = ./build
+BUILD_OBJ_DIR = $(BUILD_DIR)/obj
 
-.PHONE: clean run_arrint_test run_aint_test run_arrint_bench run_aint_bench
+TARGET_NAMES = stack_arrint_test stack_llint_test stack_arrint_bench stack_llint_bench
+TARGETS = $(TARGET_NAMES:%=$(BUILD_DIR)/%)
 
-run_arrint_test: arrint_test
-	./arrint_test
+SRCS = $(wildcard *.c)
+OBJECTS = $(SRCS:%.c=$(BUILD_OBJ_DIR)/%.o)
+DEPS = $(wildcard $(OBJECTS:%=%.d))
 
-run_aint_test: aint_test
-	./aint_test
+all: $(TARGETS)
 
-run_aint_bench: aint_bench
-	./aint_bench
+.PHONE: clean 
 
-run_arrint_bench: arrint_bench
-	./arrint_bench
+$(BUILD_DIR)/stack_%_test: $(BUILD_OBJ_DIR)/stack_%.o $(BUILD_OBJ_DIR)/stack_%_test.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+$(BUILD_DIR)/stack_%_bench: $(BUILD_OBJ_DIR)/stack_%.o $(BUILD_OBJ_DIR)/hrtime.o $(BUILD_OBJ_DIR)/stack_%_bench.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+$(BUILD_OBJ_DIR):
+	mkdir -pv $(BUILD_OBJ_DIR)
+
+$(BUILD_OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_OBJ_DIR)
+	$(CC) $(CFLAGS) -MD -MP -MF "$@.d" -c $< -o $@ $(LDFLAGS)
+
+include $(DEPS)
 
 clean:
-	- rm arrint_test arrint_bench aint_test aint_bench
-
-arrint_test:
-	$(CC) $(CFLAGS) $(ARRINT_FILES) stack_arrint_test.c -o arrint_test
-
-aint_test:
-	$(CC) $(CFLAGS) $(AINT_FILES) stack_aint_test.c -o aint_test
-
-aint_bench:
-	$(CC) $(CFLAGS) $(AINT_FILES) $(HRTIME) stack_aint_bench.c -o aint_bench
-
-arrint_bench:
-	$(CC) $(CFLAGS) $(ARRINT_FILES) $(HRTIME) stack_arrint_bench.c -o arrint_bench
+	- rm $(TARGETS) $(wildcard OBJECTS) $(DEPS)

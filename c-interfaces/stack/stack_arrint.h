@@ -2,6 +2,7 @@
 #define CII_STACK_ARRINT
 
 #include <stdio.h>
+#include <inttypes.h>
 
 /**
  * Stack A will implement Integer stack using array of integers.
@@ -11,14 +12,14 @@
 #define CII_STACK_START 128
 
 struct stack_arrint {
-  int size;
-  int count;
+  uint32_t size;
+  uint32_t count;
   int *arr;
 };
 
 typedef struct stack_arrint stack_arrint_t;
 
-extern stack_arrint_t *cii_stack_arrint_new();
+extern stack_arrint_t *cii_stack_arrint_new(void);
 extern int cii_stack_arrint_empty(stack_arrint_t *stack);
 extern void cii_stack_arrint_push(stack_arrint_t *stack, int x);
 extern int cii_stack_arrint_pop(stack_arrint_t *stack);
