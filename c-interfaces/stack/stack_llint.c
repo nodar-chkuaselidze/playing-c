@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "stack_aint.h"
+#include "stack_llint.h"
 
-stack_aint_t *cii_stack_aint_new() {
-  stack_aint_t *stack = malloc(sizeof(stack_aint_t));
+stack_llint_t *cii_stack_llint_new() {
+  stack_llint_t *stack = malloc(sizeof(stack_llint_t));
 
   assert(stack != NULL);
   return stack;
 }
 
-void cii_stack_aint_push(stack_aint_t *stack, int x) {
-  stack_aint_elem_t *elem = malloc(sizeof(stack_aint_elem_t));
+void cii_stack_llint_push(stack_llint_t *stack, int x) {
+  stack_llint_elem_t *elem = malloc(sizeof(stack_llint_elem_t));
 
   assert(stack != NULL);
   assert(elem != NULL);
@@ -23,13 +23,13 @@ void cii_stack_aint_push(stack_aint_t *stack, int x) {
   stack->count++;
 }
 
-int cii_stack_aint_empty(stack_aint_t *stack) {
+int cii_stack_llint_empty(stack_llint_t *stack) {
   assert(stack != NULL);
   return stack->count == 0;
 }
 
-int cii_stack_aint_pop(stack_aint_t *stack) {
-  stack_aint_elem_t *head = stack->head;
+int cii_stack_llint_pop(stack_llint_t *stack) {
+  stack_llint_elem_t *head = stack->head;
 
   assert(stack != NULL);
   assert(stack->count > 0);
@@ -44,7 +44,7 @@ int cii_stack_aint_pop(stack_aint_t *stack) {
   return value;
 }
 
-void cii_stack_aint_free(stack_aint_t *stack) {
+void cii_stack_llint_free(stack_llint_t *stack) {
   assert(stack != NULL);
 
   if (stack->count == 0) {
@@ -52,7 +52,7 @@ void cii_stack_aint_free(stack_aint_t *stack) {
     return;
   }
 
-  stack_aint_elem_t *curr, *next;
+  stack_llint_elem_t *curr, *next;
 
   for (curr = stack->head; curr != NULL; curr = next) {
     next = curr->next;
@@ -62,11 +62,11 @@ void cii_stack_aint_free(stack_aint_t *stack) {
   free(stack);
 }
 
-void cii_stack_aint_print(FILE *out, stack_aint_t *stack) {
+void cii_stack_llint_print(FILE *out, stack_llint_t *stack) {
   assert(stack != NULL);
   fprintf(out, "Stack count: %d.\n", stack->count);
 
-  stack_aint_elem_t *elem = stack->head;
+  stack_llint_elem_t *elem = stack->head;
 
   while (elem != NULL) {
     fprintf(out, "%d->", elem->value);

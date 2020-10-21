@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include "hrtime.h"
-#include "stack_aint.h"
+#include "stack_llint.h"
 
 #define N 10000000
 
@@ -9,19 +9,19 @@ int main() {
 
   uint64_t start = hrtime();
 
-  stack_aint_t *stack = cii_stack_aint_new();
+  stack_llint_t *stack = cii_stack_llint_new();
 
   for (int i = 0; i < N; i++) {
-    cii_stack_aint_push(stack, i);
+    cii_stack_llint_push(stack, i);
   }
 
   uint64_t pushed = hrtime();
 
   for (int i = 0; i < N; i++) {
-    cii_stack_aint_pop(stack);
+    cii_stack_llint_pop(stack);
   }
 
-  cii_stack_aint_free(stack);
+  cii_stack_llint_free(stack);
 
   uint64_t end = hrtime();
 
