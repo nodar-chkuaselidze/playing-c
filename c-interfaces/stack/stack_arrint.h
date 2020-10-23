@@ -11,13 +11,13 @@
 
 #define CII_STACK_START 128
 
-struct stack_arrint {
+struct stack_arrint_s {
   uint32_t size;
   uint32_t count;
   int *arr;
 };
 
-typedef struct stack_arrint stack_arrint_t;
+typedef struct stack_arrint_s stack_arrint_t;
 
 extern stack_arrint_t *cii_stack_arrint_new(void);
 extern int cii_stack_arrint_empty(stack_arrint_t *stack);

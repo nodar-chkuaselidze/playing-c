@@ -7,19 +7,19 @@
  * Stack A will implement Integer stack using linked list.
  */
 
-struct stack_llint_elem {
+struct stack_llint_elem_s {
   struct stack_llint_elem* next;
   int value;
 };
 
-typedef struct stack_llint_elem stack_llint_elem_t;
+typedef struct stack_llint_elem_s stack_llint_elem_t;
 
-struct stack_llint {
+struct stack_llint_s {
   int count;
   stack_llint_elem_t *head;
 };
 
-typedef struct stack_llint stack_llint_t;
+typedef struct stack_llint_s stack_llint_t;
 
 extern stack_llint_t *cii_stack_llint_new(void);
 extern int cii_stack_llint_empty(stack_llint_t *stack);
