@@ -1,22 +1,21 @@
 ##
 # Nod is kinda learning C..
 
-DIRECTORIES=$(wildcard */)
-FILES=$(wildcard */*.c)
+FILES=$(wildcard test*/*.c)
 BINS=$(patsubst %.c,%.o,$(FILES))
 
-WARNINGS := -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align \
-            -Wwrite-strings -Wmissing-prototypes -Wmissing-declarations \
-            -Wredundant-decls -Wnested-externs -Winline \
-            -Wuninitialized -Wconversion -Wstrict-prototypes
-CFLAGS := -g -std=c99 $(WARNINGS)
+SUP_WARNINGS=-Wno-incompatible-pointer-types \
+						-Wno-sizeof-array-argument
+CFLAGS := -g -std=c11 $(SUP_WARNINGS)
 
 
 all: $(BINS)
-	@echo "building.."
+	@echo "NOTE: WARNINGS are suppressed with make command."
+	@echo "Build finished."
 
 clean:
 	@$(RM) $(BINS)
+	@$(RM) $(wildcard test*/a.out)
 
 %.o: %.c Makefile
 	@$(CC) $(CFLAGS) $< -o $@
