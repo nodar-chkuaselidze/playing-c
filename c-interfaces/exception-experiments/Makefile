@@ -1,7 +1,8 @@
 WARNINGS := -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align \
 			-Wwrite-strings -Wmissing-prototypes -Wmissing-declarations \
 			-Wredundant-decls -Wnested-externs -Winline \
-			-Wuninitialized -Wconversion -Wstrict-prototypes
+			-Wuninitialized -Wconversion -Wstrict-prototypes \
+			-Wno-unused-variable
 CFLAGS := -O0 -std=c11 $(WARNINGS) $(CFLAGS)
 LDFLAGS := $(LDFLAGS)
 
@@ -16,7 +17,10 @@ TARGETS = $(SRCS:%.c=$(BUILDDIR)/%)
 
 all: $(TARGETS)
 
-$(BUILDDIR)/%: %.c
+build:
+	mkdir -pv build
+
+$(BUILDDIR)/%: %.c | build
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 
