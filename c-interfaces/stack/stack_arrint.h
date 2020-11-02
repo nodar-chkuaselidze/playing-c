@@ -1,7 +1,6 @@
 #ifndef CII_STACK_ARRINT
 #define CII_STACK_ARRINT
 
-#include <stdio.h>
 #include <inttypes.h>
 
 /**
