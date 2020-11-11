@@ -6,7 +6,7 @@ BINS=$(patsubst %.c,%.o,$(FILES))
 
 SUP_WARNINGS=-Wno-incompatible-pointer-types \
 						-Wno-sizeof-array-argument
-CFLAGS := -g -std=c11 $(SUP_WARNINGS)
+CFLAGS := -g -O0 -std=c11 $(SUP_WARNINGS) $(CFLAGS)
 
 
 all: $(BINS)
