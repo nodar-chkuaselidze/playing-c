@@ -16,7 +16,6 @@ void _memprint(void *ptr, size_t length);
  * Experiment with struct alignments..
  */
 
-// Use this to clean stack
 struct st1 {
   char a;
 };
