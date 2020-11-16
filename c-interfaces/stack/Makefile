@@ -19,7 +19,7 @@ DEPS = $(wildcard $(OBJECTS:%=%.d))
 
 all: $(TARGETS)
 
-.PHONE: clean 
+.PHONY: clean
 
 $(BUILD_DIR)/stack_%_test: $(BUILD_OBJ_DIR)/stack_%.o $(BUILD_OBJ_DIR)/stack_%_test.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
