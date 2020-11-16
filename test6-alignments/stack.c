@@ -136,7 +136,6 @@ void example2() {
 }
 
 /**
- * Unoptimized.
  * GCC:
  *   GDB Out:
  *    a: 0x7fffffffde4c (1 byte)
