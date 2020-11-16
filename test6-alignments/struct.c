@@ -25,6 +25,16 @@ struct st2 {
   char a[2];
 };
 
+/**
+ * Memory layout:
+ *  sizeof: 12
+ *  alignof: 4
+ *
+ *  0x7ffd9b77e8c0: 0x01    0xff    0xff    0xff    0x14    0x13    0x12    0x11
+ *                  └ a                             └ b                        ⅃
+ *  0x7ffd9b77e8c8: 0x21    0x31    0xff    0xff
+ *                  └ c     └ d
+ */
 struct st3 {
   char a;
   int b;
@@ -32,11 +42,38 @@ struct st3 {
   char d;
 };
 
+/**
+ * Memory layout:
+ *  sizeof: 16
+ *  alignof: 8
+ *
+ *  0x7ffd9b77e8c0: 0x01    0xff    0xff    0xff    0xff    0xff    0xff    0xff
+ *                  └ a
+ *  0x7ffd9b77e8c8: 0x09    0x08    0x07    0x06    0x05    0x04    0x03    0x02
+ *                  └ b                                                        ⅃
+ *
+ */
 struct st4 {
   char a;
   long b;
 };
 
+/**
+ * Memory layout:
+ *  sizeof: 40
+ *  alignof: 8
+ *
+ *  0x7ffd9b77e8c0: 0x01    0xff    0xff    0xff    0xff    0xff    0xff    0xff
+ *                  └ a
+ *  0x7ffd9b77e8c8: 0x18    0x17    0x16    0x15    0x14    0x13    0x12    0x11
+ *                  └ b                                                        ⅃
+ *  0x7ffd9b77e8d0: 0x21    0xff    0xff    0xff    0x34    0x33    0x32    0x31
+ *                  └ c                             └ d                        ⅃
+ *  0x7ffd9b77e8d8: 0x41    0xff    0xff    0xff    0xff    0xff    0xff    0xff
+ *                  └ e
+ *  0x7ffd9b77e8e0: 0x58    0x57    0x56    0x55    0x54    0x53    0x52    0x51
+ *                  └ f                                                        ⅃
+ */
 struct st5 {
   char a;
   long b;
@@ -55,7 +92,7 @@ int main(void) {
   {
     printf("\n  struct st3\n");
     struct st3 x = {};
-    
+
     mark(x);
     x.a = 1;
     x.b = 0x11121314;
